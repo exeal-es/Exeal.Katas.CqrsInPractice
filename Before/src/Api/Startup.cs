@@ -26,6 +26,7 @@ namespace Api
         public void Configure(IApplicationBuilder app)
         {
             app.UseMiddleware<ExceptionHandler>();
+            app.UseRouting();
             app.UseEndpoints(builder => builder.MapControllers());
         }
     }
