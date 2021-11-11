@@ -82,6 +82,16 @@ namespace Api.Controllers
 
             return Ok();
         }
+        
+        [HttpGet("{id}")]
+        public IActionResult Get(long id)
+        {
+            Student student = _studentRepository.GetById(id);
+            if (student == null)
+                return Error($"No student found for Id {id}");
+
+            return Ok(ConvertToDto(student));
+        }
 
         [HttpPut("{id}")]
         public IActionResult Update(long id, [FromBody] StudentDto dto)
