@@ -17,7 +17,7 @@ namespace Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddControllers();
 
             services.AddSingleton(new SessionFactory(Configuration["ConnectionString"]));
             services.AddScoped<UnitOfWork>();
@@ -26,7 +26,7 @@ namespace Api
         public void Configure(IApplicationBuilder app)
         {
             app.UseMiddleware<ExceptionHandler>();
-            app.UseMvc();
+            app.UseEndpoints(builder => builder.MapControllers());
         }
     }
 }
