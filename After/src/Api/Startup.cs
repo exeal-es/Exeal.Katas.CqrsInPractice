@@ -18,8 +18,8 @@ namespace Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
-
+            services.AddControllers();
+            
             var config = new Config(3); // Deserialize from appsettings.json
             services.AddSingleton(config);
 
@@ -36,7 +36,8 @@ namespace Api
         public void Configure(IApplicationBuilder app)
         {
             app.UseMiddleware<ExceptionHandler>();
-            app.UseMvc();
+            app.UseRouting();
+            app.UseEndpoints(builder => builder.MapControllers());
         }
     }
 }
